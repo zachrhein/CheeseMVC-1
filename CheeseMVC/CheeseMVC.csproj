@@ -11,4 +11,7 @@
   <ItemGroup>
     <Folder Include="Views\Cheese\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Cheese\Edit.html" />
+  </ItemGroup>
 </Project>

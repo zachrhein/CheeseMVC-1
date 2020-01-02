@@ -26,12 +26,14 @@ namespace CheeseMVC.Models
         {
             Cheese cheeseToRemove = GetById(id);
             cheeses.Remove(cheeseToRemove);
+
         }
 
         // GetById 
         public static Cheese GetById (int id)
         {
             return cheeses.Single(x => x.CheeseId == id);
+
         }
         
     }
