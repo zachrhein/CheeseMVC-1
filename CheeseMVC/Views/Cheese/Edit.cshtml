@@ -3,12 +3,13 @@
 *@
 @{
 }
-
-<form method="post">
-    <label for="name">Type of Cheese</label>
-    <input name="name" type="text"/>
-    <br />
-    <label for="description">Description</label>
-    <input name="description" type="text"/>
-    <input type="submit" value="Add"/>
-</form>
+     <h1> Edit Cheese @ViewBag.cheese.Name (id=@ViewBag.cheese.CheeseId) </h1>
+    <form method="post">
+        <input type="hidden" value="@ViewBag.cheese.CheeseId" name="id" />
+        <label for="name">Type of Cheese</label>
+        <input name="name" type="text" value="@ViewBag.cheese.Name" />
+        <br />
+        <label for="description">Description value="value="@ViewBag.cheese.Description"</label>
+        <input name="description" type="text" />
+        <input type="submit" value="Add" />
+    </form>
