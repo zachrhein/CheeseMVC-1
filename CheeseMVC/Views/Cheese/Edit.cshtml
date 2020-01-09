@@ -3,9 +3,9 @@
 *@
 @{
 }
-     <h1> Edit Cheese @ViewBag.cheese.Name (id=@ViewBag.cheese.CheeseId) </h1>
+     <h1> Edit Cheese @ViewBag.cheese.Name (id=@ViewBag.cheese.Id) </h1>
     <form method="post">
-        <input type="hidden" value="@ViewBag.cheese.CheeseId" name="id" />
+        <input type="hidden" value="@ViewBag.cheese.Id" name="id" />
         <label for="name">Type of Cheese</label>
         <input name="name" type="text" value="@ViewBag.cheese.Name" />
         <br />

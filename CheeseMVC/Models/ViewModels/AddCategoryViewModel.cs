@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CheeseMVC.Models.ViewModels
 {
-    public class AddCheeseViewModel
+    public class AddCategoryViewModel
     {
-        //internal int cheeseId;
-
         [Required]
-        [Display(Name = "Cheese Name")]
+        [Display(Name = "Category Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "You must give your cheese a description")]
-        public string Description { get; set; }
+        public AddCategoryViewModel()
+        {
+            
+        }
+
     }
 }
-  
