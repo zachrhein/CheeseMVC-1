@@ -1,7 +1,4 @@
-﻿@{
-    
-}
-@model List<CheeseMVC.Models.Cheese>
+﻿@model List<CheeseMVC.Models.Cheese>
 
 
 <h1>My Cheeses</h1>
@@ -19,16 +16,18 @@
                 <th>Remove</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Category</th>
                 <th>Edit</th>
             </tr>
         @foreach (Cheese cheese in Model)
         {
-            <tr>
-                <td><input type="checkbox" name="cheeseIds" value="@cheese.Id"/></td>
-                <td>@cheese.Name</td>
-                <td>@cheese.Description</td>
-                <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.Id">edit</a></td>
-            </tr>
+    <tr>
+        <td><input type="checkbox" name="cheeseIds" value="@cheese.Id" /></td>
+        <td>@cheese.Name</td>
+        <td>@cheese.Description</td>
+        <td>@cheese.Category.Name</td>
+        <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.Id">edit</a></td>
+    </tr>
         }
     </table>
     <input type="submit" value="Remove Selected" />

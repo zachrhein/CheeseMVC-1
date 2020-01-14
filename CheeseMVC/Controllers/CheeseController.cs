@@ -6,6 +6,7 @@ using CheeseMVC.Data;
 using CheeseMVC.Models;
 using CheeseMVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,7 +17,7 @@ namespace CheeseMVC.Controllers
     {
         private CheeseDbContext context;
 
-        public CheeseController(CheeseDbContext dbContext) 
+        public CheeseController(CheeseDbContext dbContext)
         {
             context = dbContext;
         }
@@ -24,8 +25,9 @@ namespace CheeseMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Cheese> cheeses = context.Cheeses.ToList();
-            
+            IList<Cheese> cheeses = context.Cheeses.Include(c => c.Category).ToList();
+
+
 
             return View(cheeses);
         }
@@ -36,12 +38,12 @@ namespace CheeseMVC.Controllers
                 Cheese theCheese = context.Cheeses.Single(c => c.Id == cheeseId);
                 context.Cheeses.Remove(theCheese);
             }
-            context.SaveChanges(); 
+            context.SaveChanges();
             return Redirect("/Cheese");
         }
         public IActionResult Add()
         {
-            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
+            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel(context.Categories.ToList());
             return View(addCheeseViewModel);
         }
 
@@ -49,20 +51,25 @@ namespace CheeseMVC.Controllers
         [HttpPost]
         public IActionResult Add(AddCheeseViewModel addCheeseViewModel)
         {
+
             if (ModelState.IsValid)
             {
+                CheeseCategory newCheeseCategory =
+                    context.Categories.Single(c => c.ID == addCheeseViewModel.CategoryID);
                 Cheese newCheese = new Cheese
                 {
                     Name = addCheeseViewModel.Name,
-                    Description = addCheeseViewModel.Description
+                    Description = addCheeseViewModel.Description,
+                    Category = newCheeseCategory
                 };
                 context.Cheeses.Add(newCheese);
                 context.SaveChanges();
+
                 return Redirect("/Cheese");
             }
             return View(addCheeseViewModel);
-        }
 
+        }
 
         public IActionResult Edit(int cheeseId)
         {
@@ -73,20 +80,22 @@ namespace CheeseMVC.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit (int id, string name, string description)
+        public IActionResult Edit(int id, string name, string description)
         {
             Cheese ch = context.Cheeses.Single(c => c.Id == id);
             ch.Name = name;
             ch.Description = description;
             context.SaveChanges();
-            
+
             return Redirect("/Cheese");
         }
 
-      
+
     }
 
-    
+
+
+
 }
 
 
