@@ -1,5 +1,6 @@
 ﻿using CheeseMVC.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace CheeseMVC.Data
 {
     public class CheeseDbContext : DbContext

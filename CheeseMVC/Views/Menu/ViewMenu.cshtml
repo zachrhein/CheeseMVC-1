@@ -7,7 +7,7 @@
 
 
 
-{
+
     <ul>
         @foreach (var menus in Model.Items)
         {
@@ -19,5 +19,4 @@
 {
     <p><i>No menu items</i></p>
 }
-<p><a asp-controller=""Menu" asp-action="="AddItem" asp-route="@Model.Menu.ID">Add Item</a></p>
-}
+<p><a asp-controller="Menu" asp-action="AddItem" asp-route-id="@Model.Menu.ID">Add Item</a></p>
